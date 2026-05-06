@@ -217,7 +217,7 @@ const SignUp = () => {
     loginLogo: "/logo.png",
     loginBackground: "",
     loginWhatsapp: "https://wa.me/5500000000000",
-    companyName: "Whaticket",
+    companyName: "Backs.ai",
   });
   const [userCreationEnabled, setUserCreationEnabled] = useState(true);
 
@@ -317,7 +317,7 @@ const SignUp = () => {
             ? ""
             : brandingData.loginBackground,
           loginWhatsapp: brandingData.loginWhatsapp || "https://wa.me/5500000000000",
-          companyName: String(publicAppName || "").trim() || "Whaticket",
+          companyName: String(publicAppName || "").trim() || "Backs.ai",
         });
       } catch (err) {
         // segue com fallback local

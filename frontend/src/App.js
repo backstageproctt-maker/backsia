@@ -206,11 +206,11 @@ const App = () => {
       });
     getPublicSetting("appName")
       .then((name) => {
-        setAppName(name || "Whaticket - V15.0.0");
+        setAppName(name || "Backs.ai");
       })
       .catch((error) => {
         console.log("!==== Erro ao carregar temas: ====!", error);
-        setAppName("Whaticket - V15.0.0");
+        setAppName("Backs.ai");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

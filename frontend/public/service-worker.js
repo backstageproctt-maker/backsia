@@ -66,7 +66,7 @@ self.addEventListener("push", event => {
     payload = { title: "Notificação", body: event.data.text() };
   }
 
-  const title = payload.title || "Whaticket - V15.0.0";
+  const title = payload.title || "Backs.ai";
   const options = {
     body: payload.body || "",
     icon: payload.icon || "/android-chrome-192x192.png",
