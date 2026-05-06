@@ -97,18 +97,15 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px 10px 12px",
   },
   listItem: {
-    height: 40,
-    marginBottom: 4,
-    borderRadius: 12,
-    paddingLeft: 10,
-    paddingRight: 10,
-    transition: "all 0.2s ease",
+    height: 44,
+    marginBottom: 6,
+    borderRadius: 16,
+    paddingLeft: 14,
+    paddingRight: 14,
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     "&:hover": {
-      backgroundColor:
-        theme.mode === "light"
-          ? "rgba(15, 23, 42, 0.05)"
-          : "rgba(248, 250, 252, 0.08)",
-      transform: "translateX(2px)",
+      backgroundColor: "rgba(255, 255, 255, 0.08)",
+      transform: "translateX(4px)",
     },
   },
   listItemIconOnly: {
@@ -124,15 +121,16 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 8,
   },
   listItemActive: {
-    backgroundColor: "rgba(0, 150, 255, 0.1)",
-    borderLeft: "3px solid #0096ff",
-    borderRadius: "0 12px 12px 0",
-    marginLeft: "-10px",
-    paddingLeft: "20px !important",
+    backgroundColor: "rgba(0, 150, 255, 0.25)",
+    boxShadow: "0 4px 15px rgba(0, 150, 255, 0.2)",
     "& $listItemLabel": {
       fontWeight: 700,
       color: "#ffffff",
+      textShadow: "0 0 8px rgba(255,255,255,0.3)",
     },
+    "& .MuiSvgIcon-root": {
+      filter: "drop-shadow(0 0 5px rgba(0, 150, 255, 0.8))",
+    }
   },
   listItemIcon: {
     minWidth: 42,
@@ -180,13 +178,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   submenuSection: {
-    margin: "2px 0 8px",
-    padding: "6px 0",
-    borderRadius: 12,
-    background:
-      theme.mode === "light"
-        ? "linear-gradient(180deg, rgba(148, 163, 184, 0.12) 0%, rgba(148, 163, 184, 0.05) 100%)"
-        : "linear-gradient(180deg, rgba(51, 65, 85, 0.7) 0%, rgba(30, 41, 59, 0.45) 100%)",
+    margin: "4px 8px 12px",
+    padding: "8px 0",
+    borderRadius: 20,
+    background: "rgba(255, 255, 255, 0.03)",
+    border: "1px solid rgba(255, 255, 255, 0.05)",
   },
   groupExpandIcon: {
     color: theme.mode === "light" ? "#667085" : "#94a3b8",

@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       height: "calc(100vh - 56px)",
     },
-    backgroundColor: theme.palette.fancyBackground,
+    backgroundColor: "#020810", // Fundo super dark para o glass brilhar
     "& .MuiButton-outlinedPrimary": {
       color: theme.palette.primary,
       border:
@@ -257,13 +257,25 @@ const useStyles = makeStyles((theme) => ({
 
   toolbarIcon: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
-    padding: "0 16px",
-    minHeight: "70px",
-    background: "rgba(255, 255, 255, 0.02)",
-    borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
-    [theme.breakpoints.down("sm")]: { height: "64px" },
+    justifyContent: "center",
+    padding: "20px 16px",
+    minHeight: "120px",
+    background: "transparent",
+    gap: "15px",
+    "&::before": { // Botões estilo Mac
+      content: '""',
+      display: "flex",
+      gap: "6px",
+      width: "100%",
+      height: "12px",
+      marginBottom: "10px",
+      background: "radial-gradient(circle, #ff5f56 0%, #ff5f56 25%, #ffbd2e 35%, #ffbd2e 60%, #27c93f 70%, #27c93f 100%)",
+      backgroundSize: "45px 12px",
+      backgroundRepeat: "no-repeat",
+    },
+    [theme.breakpoints.down("sm")]: { height: "100px" },
   },
 
   appBar: {
@@ -307,9 +319,13 @@ const useStyles = makeStyles((theme) => ({
     }),
     overflowX: "hidden",
     overflowY: "hidden",
-    background: "#061727", // Cor Deep Ocean
-    borderRight: "1px solid rgba(255, 255, 255, 0.05)",
-    boxShadow: "10px 0 30px -15px rgba(0,0,0,0.5)",
+    background: "rgba(6, 23, 39, 0.65)", // Transparência Deep Ocean
+    backdropFilter: "blur(12px)", // Efeito de Vidro
+    borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+    margin: "12px", // Faz a sidebar "flutuar"
+    borderRadius: "24px",
+    height: "calc(100vh - 24px)",
+    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
   },
   drawerPaperClose: {
     overflowX: "hidden",
