@@ -15,7 +15,7 @@ const socketManager = {
 
 			this.currentToken = publicToken;
 			this.currentSocket = openSocket(process.env.REACT_APP_BACKEND_URL, {
-				transports: ["websocket"],
+				transports: ["polling", "websocket"],
 				pingTimeout: 18000,
 				pingInterval: 18000,
 				query: publicToken ? { token: publicToken } : {},

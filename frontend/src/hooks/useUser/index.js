@@ -28,7 +28,9 @@ const useUser = () => {
   });
 
   useEffect(() => {
-    const socket = openSocket(process.env.REACT_APP_BACKEND_URL);
+    const socket = openSocket(process.env.REACT_APP_BACKEND_URL, {
+      transports: ["polling", "websocket"]
+    });
 
     socket.on("users", (data) => {
       setUpdate(true);
