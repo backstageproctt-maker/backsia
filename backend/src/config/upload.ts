@@ -4,7 +4,7 @@ import fs from "fs";
 import Whatsapp from "../models/Whatsapp";
 import { isEmpty, isNil } from "lodash";
 
-const publicFolder = path.resolve(__dirname, "..", "..", "public");
+const publicFolder = process.env.VERCEL ? path.resolve("/tmp", "public") : path.resolve(__dirname, "..", "..", "public");
 
 export default {
   directory: publicFolder,

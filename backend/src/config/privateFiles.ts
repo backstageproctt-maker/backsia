@@ -1,7 +1,7 @@
 import path from "path";
 import multer from "multer";
 
-const privateFolder = path.resolve(__dirname, "..", "..", "private");
+const privateFolder = process.env.VERCEL ? path.resolve("/tmp", "private") : path.resolve(__dirname, "..", "..", "private");
 export default {
   directory: privateFolder,
 
