@@ -104,6 +104,10 @@ routes.use(companySettingsRoutes);
 routes.use(scheduleMessageRoutes);
 routes.use(serverMetricsRoutes);
 
+routes.get("/", (req, res) => {
+  return res.json({ message: "BacksRobo API Online", version: "2.2.2" });
+});
+
 // 🔹 NOVO: base /global-config
 routes.use("/global-config", globalConfigRoutes);
 
