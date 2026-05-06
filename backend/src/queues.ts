@@ -48,9 +48,16 @@ import Plan from "./models/Plan";
 import ShowFileService from "./services/FileServices/ShowService";
 import Files from "./models/Files";
 
-const connection = process.env.REDIS_URI || "";
+import { REDIS_URI_MSG_CONN } from "./config/redis";
+const connection = REDIS_URI_MSG_CONN || process.env.REDIS_URI || "";
 const limiterMax = process.env.REDIS_OPT_LIMITER_MAX || 1;
 const limiterDuration = process.env.REDIS_OPT_LIMITER_DURATION || 3000;
+
+const queueOptions = {
+  redis: {
+    tls: connection.startsWith("rediss://") ? { rejectUnauthorized: false } : undefined
+  }
+};
 
 interface ProcessCampaignData {
   id: number;
@@ -77,16 +84,18 @@ interface DispatchCampaignData {
   contactListItemId: number;
 }
 
-export const userMonitor = new BullQueue("UserMonitor", connection);
-export const scheduleMonitor = new BullQueue("ScheduleMonitor", connection);
+export const userMonitor = new BullQueue("UserMonitor", connection, queueOptions);
+export const scheduleMonitor = new BullQueue("ScheduleMonitor", connection, queueOptions);
 export const sendScheduledMessages = new BullQueue(
   "SendSacheduledMessages",
-  connection
+  connection,
+  queueOptions
 );
-export const campaignQueue = new BullQueue("CampaignQueue", connection);
-export const queueMonitor = new BullQueue("QueueMonitor", connection);
+export const campaignQueue = new BullQueue("CampaignQueue", connection, queueOptions);
+export const queueMonitor = new BullQueue("QueueMonitor", connection, queueOptions);
 
 export const messageQueue = new BullQueue("MessageQueue", connection, {
+  ...queueOptions,
   limiter: {
     max: limiterMax as number,
     duration: limiterDuration as number
