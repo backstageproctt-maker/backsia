@@ -7,6 +7,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "nodemon dist/server.js",
+    "start:prod": "node dist/server.js",
     "dev:server": "ts-node-dev --respawn --transpile-only --ignore node_modules src/server.ts",
     "db:migrate": "npx sequelize-cli db:migrate",
     "db:migrate:undo": "npx sequelize-cli db:migrate:undo",

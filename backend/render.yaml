@@ -1,0 +1,9 @@
+type: web
+name: backsia-backend
+region: oregon # choose desired region
+env: node
+plan: starter # or free if available
+autoDeploy: true
+buildCommand: npm install && npm run build
+startCommand: npm run start:prod
+# Environment variables will be pulled from .env or set in Render UI
