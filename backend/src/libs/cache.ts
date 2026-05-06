@@ -102,6 +102,7 @@ class CacheSingleton {
   }
 }
 
-const redisInstance = new Redis(REDIS_URI_CONNECTION);
+const redisOptions = REDIS_URI_CONNECTION.startsWith("rediss://") || process.env.NODE_ENV === "production" ? { tls: { rejectUnauthorized: false } } : {};
+const redisInstance = new Redis(REDIS_URI_CONNECTION, redisOptions);
 
 export default CacheSingleton.getInstance(redisInstance);
