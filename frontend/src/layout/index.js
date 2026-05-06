@@ -258,11 +258,12 @@ const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundSize: "cover",
-    padding: "0 8px",
-    minHeight: "48px",
-    [theme.breakpoints.down("sm")]: { height: "48px" },
+    justifyContent: "space-between",
+    padding: "0 16px",
+    minHeight: "70px",
+    background: "rgba(255, 255, 255, 0.02)",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
+    [theme.breakpoints.down("sm")]: { height: "64px" },
   },
 
   appBar: {
@@ -306,6 +307,9 @@ const useStyles = makeStyles((theme) => ({
     }),
     overflowX: "hidden",
     overflowY: "hidden",
+    background: "#061727", // Cor Deep Ocean
+    borderRight: "1px solid rgba(255, 255, 255, 0.05)",
+    boxShadow: "10px 0 30px -15px rgba(0,0,0,0.5)",
   },
   drawerPaperClose: {
     overflowX: "hidden",
@@ -517,13 +521,20 @@ const LoggedInLayout = ({ children }) => {
         open={drawerOpen}
       >
         <div className={classes.toolbarIcon}>
-          {/* Logo visível no Drawer */}
           <img
             src={logoSrc}
             alt="logo"
-            className={drawerOpen ? classes.logoImg : classes.hideLogo}
+            style={{ 
+              height: 40, 
+              width: "auto",
+              filter: "drop-shadow(0 0 8px rgba(0, 150, 255, 0.3))" 
+            }}
+            className={drawerOpen ? "" : classes.hideLogo}
           />
-          <IconButton onClick={() => setDrawerOpen(!drawerOpen)}>
+          <IconButton 
+            onClick={() => setDrawerOpen(!drawerOpen)}
+            style={{ color: "rgba(255, 255, 255, 0.6)" }}
+          >
             <ChevronLeftIcon />
           </IconButton>
         </div>
