@@ -45,7 +45,10 @@ app.set("queues", {
   sendScheduledMessages
 });
 
-const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : true;
+// Aceitar qualquer origem temporariamente para evitar bloqueios da Vercel
+const allowedOrigins = (origin: any, callback: any) => {
+  callback(null, true);
+};
 
 // Configuração do BullBoard
 if (String(process.env.BULL_BOARD).toLocaleLowerCase() === 'true' && process.env.REDIS_URI_ACK !== '') {
