@@ -626,7 +626,28 @@ const MainListItems = ({ collapsed, drawerClose }) => {
       <Collapse in={!collapsed && openInventory} timeout="auto" unmountOnExit className={classes.submenuSection}>
         {showKanban && <ListItemLink to="/kanban" primary={i18n.t("mainDrawer.listItems.kanban")} icon={<ViewKanban />} tooltip={collapsed} />}
         <ListItemLink to="/quick-messages" primary={i18n.t("mainDrawer.listItems.quickMessages")} icon={<FlashOnIcon />} tooltip={collapsed} />
-        <ListItemLink to="/flowbuilders" primary="Flowbuilder" icon={<Webhook />} tooltip={collapsed} />
+        
+        {/* Submenu aninhado do Flowbuilder */}
+        <ListItem
+          button
+          className={`${classes.listItem} ${collapsed ? classes.listItemIconOnly : ""}`}
+          onClick={() => setOpenFlowSubmenu(!openFlowSubmenu)}
+          style={{ paddingLeft: collapsed ? 14 : 32 }} // Recuo para mostrar que é filho
+        >
+          <ListItemIcon className={`${classes.listItemIcon} ${collapsed ? classes.listItemIconOnlyWrap : ""}`}>
+            <Webhook style={{ color: "white" }} />
+          </ListItemIcon>
+          {!collapsed && (
+            <ListItemText primary={<Typography className={classes.listItemLabel}>Flowbuilder</Typography>} />
+          )}
+          {!collapsed && (openFlowSubmenu ? <ExpandLessIcon style={{ color: "white" }} /> : <ExpandMoreIcon style={{ color: "white" }} />)}
+        </ListItem>
+        <Collapse in={!collapsed && openFlowSubmenu} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemLink to="/flowbuilders" primary="Criar Fluxos" icon={<Webhook />} tooltip={collapsed} className={classes.nested} />
+            <ListItemLink to="/phrases" primary="Lista de Frases" icon={<ListIcon />} tooltip={collapsed} className={classes.nested} />
+          </List>
+        </Collapse>
       </Collapse>
 
       {/* 5. Finance */}
@@ -645,8 +666,33 @@ const MainListItems = ({ collapsed, drawerClose }) => {
       </ListItem>
       <Collapse in={!collapsed && openFinance} timeout="auto" unmountOnExit className={classes.submenuSection}>
         <ListItemLink to="/financeiro" primary={i18n.t("mainDrawer.listItems.financeiro")} icon={<LocalAtmIcon />} tooltip={collapsed} />
-        {showCampaigns && <ListItemLink to="/campaigns" primary={i18n.t("mainDrawer.listItems.campaigns")} icon={<EventAvailableIcon />} tooltip={collapsed} />}
         {showSchedules && <ListItemLink to="/schedules" primary={i18n.t("mainDrawer.listItems.schedules")} icon={<Schedule />} tooltip={collapsed} />}
+        
+        {/* Submenu aninhado de Campanhas */}
+        {showCampaigns && (
+          <>
+            <ListItem
+              button
+              className={`${classes.listItem} ${collapsed ? classes.listItemIconOnly : ""}`}
+              onClick={() => setOpenCampaignSubmenu(!openCampaignSubmenu)}
+              style={{ paddingLeft: collapsed ? 14 : 32 }} // Recuo
+            >
+              <ListItemIcon className={`${classes.listItemIcon} ${collapsed ? classes.listItemIconOnlyWrap : ""}`}>
+                <EventAvailableIcon style={{ color: "white" }} />
+              </ListItemIcon>
+              {!collapsed && (
+                <ListItemText primary={<Typography className={classes.listItemLabel}>{i18n.t("mainDrawer.listItems.campaigns")}</Typography>} />
+              )}
+              {!collapsed && (openCampaignSubmenu ? <ExpandLessIcon style={{ color: "white" }} /> : <ExpandMoreIcon style={{ color: "white" }} />)}
+            </ListItem>
+            <Collapse in={!collapsed && openCampaignSubmenu} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemLink to="/campaigns" primary="Listagem" icon={<EventAvailableIcon />} tooltip={collapsed} className={classes.nested} />
+                <ListItemLink to="/campaigns-config" primary="Configurações" icon={<SettingsOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
+              </List>
+            </Collapse>
+          </>
+        )}
       </Collapse>
 
       {/* 6. Reports */}
