@@ -55,7 +55,6 @@ import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
 import InsertChartOutlinedIcon from "@material-ui/icons/InsertChartOutlined";
 import AppsOutlinedIcon from "@material-ui/icons/AppsOutlined";
-import Webhook from "@mui/icons-material/Webhook";
 
 import { WhatsAppsContext } from "../context/WhatsApp/WhatsAppsContext";
 import { AuthContext } from "../context/Auth/AuthContext";
