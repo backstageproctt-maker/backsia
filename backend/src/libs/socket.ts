@@ -26,7 +26,7 @@ const jwtPayloadSchema = z.object({
 // Origens CORS permitidas
 const ALLOWED_ORIGINS = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(",").map((url) => url.trim())
-  : ["http://localhost:3000"];
+  : ["http://localhost:3000", "https://backsrobo-v15.vercel.app"];
 
 // Ajuste da classe AppError para compatibilidade com Error
 class SocketCompatibleAppError extends Error {
