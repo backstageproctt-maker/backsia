@@ -13,6 +13,16 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "DB_DIALECT": "postgres",
+    "DB_HOST": "aws-1-us-east-1.pooler.supabase.com",
+    "DB_PORT": "6543",
+    "DB_NAME": "postgres",
+    "DB_USER": "postgres.uvyqqjluwmaycbidxiem",
+    "DB_PASS": "[M@eeuteamo12]",
+    "JWT_SECRET": "3123123213123",
+    "JWT_REFRESH_SECRET": "3123123213123",
+    "REDIS_URI_ACK": "rediss://default:gQAAAAAAAXd0AAIgcDE1OTBhMzQ0YWE4MmI0OThiOWVkY2Q2NTY2MTliYWU2Yw@artistic-griffon-96116.upstash.io:6379",
+    "FRONTEND_URL": "https://backsia.vercel.app"
   }
 }
