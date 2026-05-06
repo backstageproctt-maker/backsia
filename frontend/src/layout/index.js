@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       height: "calc(100vh - 56px)",
     },
-    backgroundColor: "#020810", // Fundo super dark para o glass brilhar
+    backgroundColor: theme.palette.fancyBackground,
     "& .MuiButton-outlinedPrimary": {
       color: theme.palette.primary,
       border:
@@ -306,7 +306,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     overflowX: "hidden",
     overflowY: "hidden",
-    background: "#110B5C", // Azul escuro sólido da referência
+    background: "radial-gradient(circle at 50% 50%, #007bff 0%, #020531 100%)", // Degradê com brilho central
     borderRight: "none",
   },
   drawerPaperClose: {
