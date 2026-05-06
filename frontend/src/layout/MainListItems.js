@@ -97,15 +97,14 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px 10px 12px",
   },
   listItem: {
-    height: 44,
-    marginBottom: 6,
-    borderRadius: 16,
-    paddingLeft: 14,
-    paddingRight: 14,
-    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    height: 52,
+    marginBottom: 4,
+    borderRadius: 0,
+    paddingLeft: 24,
+    paddingRight: 24,
+    transition: "all 0.2s",
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.08)",
-      transform: "translateX(4px)",
+      backgroundColor: "rgba(255, 255, 255, 0.05)",
     },
   },
   listItemIconOnly: {
@@ -121,19 +120,18 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 8,
   },
   listItemActive: {
-    backgroundColor: "rgba(0, 150, 255, 0.25)",
-    boxShadow: "0 4px 15px rgba(0, 150, 255, 0.2)",
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
     "& $listItemLabel": {
       fontWeight: 700,
       color: "#ffffff",
-      textShadow: "0 0 8px rgba(255,255,255,0.3)",
     },
     "& .MuiSvgIcon-root": {
-      filter: "drop-shadow(0 0 5px rgba(0, 150, 255, 0.8))",
+      color: "#ffffff",
     }
   },
   listItemIcon: {
-    minWidth: 42,
+    minWidth: 40,
+    color: "#ffffff",
   },
   listItemIconOnlyWrap: {
     minWidth: "auto",
@@ -143,27 +141,19 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
   },
   listItemLabel: {
-    fontSize: 13,
-    fontWeight: 600,
-    letterSpacing: "0.01em",
-    color: "rgba(255, 255, 255, 0.75)", // Texto claro para fundo escuro
-    lineHeight: 1.15,
+    fontSize: 15,
+    fontWeight: 500,
+    fontFamily: "'Inter', 'Roboto', sans-serif",
+    letterSpacing: "0.02em",
+    color: "#ffffff",
+    lineHeight: 1.2,
   },
   sectionDivider: {
     margin: "12px 4px 8px",
     opacity: theme.mode === "light" ? 0.55 : 0.35,
   },
   listSubheader: {
-    marginBottom: 6,
-    paddingLeft: 14,
-    fontSize: 10,
-    fontWeight: 800,
-    textTransform: "uppercase",
-    letterSpacing: "0.12em",
-    color: "rgba(0, 150, 255, 0.6)", // Azul neon suave para as seções
-    lineHeight: "20px",
-    background: "transparent",
-    marginTop: 20,
+    display: "none", // Removendo os subheaders para ficar limpo como na imagem
   },
   iconHoverActive: {
     display: "flex",
@@ -284,22 +274,10 @@ function ListItemLink(props) {
                   overlap="circular"
                   className={classes.badge}
                 >
-                  <Avatar
-                    variant="rounded"
-                    className={classes.iconHoverActive}
-                    style={iconSurfaceStyle}
-                  >
-                    {icon}
-                  </Avatar>
+                  {icon}
                 </Badge>
               ) : (
-                <Avatar
-                  variant="rounded"
-                  className={classes.iconHoverActive}
-                  style={iconSurfaceStyle}
-                >
-                  {icon}
-                </Avatar>
+                icon
               )}
             </ListItemIcon>
           ) : null}
