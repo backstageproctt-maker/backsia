@@ -7,7 +7,10 @@ import logger from '../utils/logger';
 
 const config = configLoader(); // Carregue as configurações
 
-const queueOptions = {
+const queueOptions: BullQueue.QueueOptions = {
+  redis: {
+    tls: REDIS_URI_MSG_CONN.startsWith("rediss://") || process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined
+  },
   defaultJobOptions: {
     attempts: config.webhook.attempts,
     backoff: {
