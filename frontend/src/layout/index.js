@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 16,
     paddingLeft: 10,
     color: theme.mode === "light" ? "#f8fafc" : "#e2e8f0",
-    background: theme.palette.barraSuperior,
+    background: "radial-gradient(circle at 50% 50%, #007bff 0%, #020531 100%)", // Mesmo degradê da sidebar
     gap: theme.spacing(1),
     overflow: "visible", // não corta o scroller
     minHeight: 52,
