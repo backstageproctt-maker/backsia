@@ -55,6 +55,7 @@ const routes = Router();
 
 routes.use(userRoutes);
 routes.use("/auth", authRoutes);
+routes.use("/login", authRoutes); // Ponte direta para o login
 routes.use("/api/messages", apiRoutes);
 routes.use(settingRoutes);
 routes.use(contactRoutes);
