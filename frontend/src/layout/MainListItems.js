@@ -398,6 +398,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
   const [openFinance, setOpenFinance] = useState(false);
   const [openReports, setOpenReports] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+  const [openApp, setOpenApp] = useState(false);
 
   useEffect(() => {
     async function checkHelps() {
@@ -715,13 +716,24 @@ const MainListItems = ({ collapsed, drawerClose }) => {
       </Collapse>
 
       {/* 7. App */}
-      <ListItemLink
-        to="/connections"
-        primary="App"
-        icon={<AppsOutlinedIcon />}
-        iconKey="connections"
-        tooltip={collapsed}
-      />
+      <ListItem
+        button
+        className={`${classes.listItem} ${collapsed ? classes.listItemIconOnly : ""}`}
+        onClick={() => setOpenApp(!openApp)}
+      >
+        <ListItemIcon className={`${classes.listItemIcon} ${collapsed ? classes.listItemIconOnlyWrap : ""}`}>
+          <AppsOutlinedIcon style={{ color: "white" }} />
+        </ListItemIcon>
+        {!collapsed && (
+          <ListItemText primary={<Typography className={classes.listItemLabel}>App</Typography>} />
+        )}
+        {!collapsed && (openApp ? <ExpandLessIcon style={{ color: "white" }} /> : <ExpandMoreIcon style={{ color: "white" }} />)}
+      </ListItem>
+      <Collapse in={!collapsed && openApp} timeout="auto" unmountOnExit className={classes.submenuSection}>
+        <ListItemLink to="/connections" primary={i18n.t("mainDrawer.listItems.connections")} icon={<DeviceHubOutlined />} tooltip={collapsed} />
+        {showOpenAi && <ListItemLink to="/prompts" primary={i18n.t("mainDrawer.listItems.prompts")} icon={<DeviceHubOutlined />} tooltip={collapsed} />}
+        {showIntegrations && <ListItemLink to="/queue-integration" primary={i18n.t("mainDrawer.listItems.queueIntegration")} icon={<DeviceHubOutlined />} tooltip={collapsed} />}
+      </Collapse>
 
       {/* 8. Settings */}
       <ListItem
