@@ -9,6 +9,7 @@ import Redis, { RedisOptions } from "ioredis";
  */
 function createRedis(): Redis {
   const uri =
+    process.env.REDIS_URI_ACK ||
     process.env.IO_REDIS_URI ||
     process.env.REDIS_URI ||
     process.env.REDIS_URL ||
@@ -21,6 +22,9 @@ function createRedis(): Redis {
   };
 
   if (uri) {
+    if (uri.startsWith("rediss://") || process.env.NODE_ENV === "production") {
+       return new Redis(uri, { ...common, tls: { rejectUnauthorized: false } });
+    }
     return new Redis(uri, common);
   }
 
@@ -28,9 +32,9 @@ function createRedis(): Redis {
   const port = Number(
     process.env.IO_REDIS_PORT ||
       process.env.REDIS_PORT ||
-      5001 // Default
+      6379 // Default padrão do Redis
   );
-  const password = process.env.REDIS_PASSWORD || undefined;
+  const password = process.env.REDIS_PASSWORD || process.env.REDIS_PASS || undefined;
   const db =
     process.env.REDIS_DB !== undefined ? Number(process.env.REDIS_DB) : undefined;
 
@@ -39,6 +43,7 @@ function createRedis(): Redis {
     port,
     password,
     db,
+    tls: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
     ...common
   });
 }
