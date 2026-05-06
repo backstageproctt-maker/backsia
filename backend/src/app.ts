@@ -45,7 +45,7 @@ app.set("queues", {
   sendScheduledMessages
 });
 
-const allowedOrigins = [process.env.FRONTEND_URL];
+const allowedOrigins = process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : true;
 
 // Configuração do BullBoard
 if (String(process.env.BULL_BOARD).toLocaleLowerCase() === 'true' && process.env.REDIS_URI_ACK !== '') {
@@ -54,24 +54,6 @@ if (String(process.env.BULL_BOARD).toLocaleLowerCase() === 'true' && process.env
 }
 
 // Middlewares
-// app.use(helmet({
-//   contentSecurityPolicy: {
-//     directives: {
-//       defaultSrc: ["'self'", "http://localhost:8080"],
-//       imgSrc: ["'self'", "data:", "http://localhost:8080"],
-//       scriptSrc: ["'self'", "http://localhost:8080"],
-//       styleSrc: ["'self'", "'unsafe-inline'", "http://localhost:8080"],
-//       connectSrc: ["'self'", "http://localhost:8080"]
-//     }
-//   },
-//   crossOriginResourcePolicy: false, // Permite recursos de diferentes origens
-//   crossOriginEmbedderPolicy: false, // Permite incorporação de diferentes origens
-//   crossOriginOpenerPolicy: false, // Permite abertura de diferentes origens
-//   // crossOriginResourcePolicy: {
-//   //   policy: "cross-origin" // Permite carregamento de recursos de diferentes origens
-//   // }
-// }));
-
 app.use(compression()); // Compressão HTTP
 app.use(bodyParser.json({ limit: '5mb' })); // Aumentar o limite de carga para 5 MB
 app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
