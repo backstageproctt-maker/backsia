@@ -9,7 +9,11 @@ import sequelize from "../database";
 import User from "../models/User";
 const connection = process.env.REDIS_URI || "";
 
-export const userMonitor = new Queue("UserMonitor", connection);
+export const userMonitor = new Queue("UserMonitor", connection, {
+  redis: {
+    tls: connection.startsWith("rediss://") || process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined
+  }
+});
 
 async function handleLoginStatus(job) {
   const users: { id: number }[] = await sequelize.query(
