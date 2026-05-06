@@ -44,12 +44,8 @@ export const initIO = (httpServer: Server): SocketIO => {
   io = new SocketIO(httpServer, {
     cors: {
       origin: (origin, callback) => {
-        if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-          callback(null, true);
-        } else {
-          logger.warn(`Origem não autorizada: ${origin}`);
-          callback(new SocketCompatibleAppError("Violação da política CORS", 403));
-        }
+        // Aceitar qualquer origem temporariamente para destrancar a Vercel
+        callback(null, true);
       },
       methods: ["GET", "POST"],
       credentials: true,
