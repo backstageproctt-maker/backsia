@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useHelps from "../hooks/useHelps";
@@ -555,22 +555,45 @@ const MainListItems = ({ collapsed, drawerClose }) => {
   return (
     <div onClick={drawerClose} className={classes.menuRoot}>
 
-      {/* DASHBOARD */}
+      {/* SEÇÃO: GESTÃO */}
+      {!collapsed && (
+        <ListSubheader inset className={classes.listSubheader}>
+          Gestão
+        </ListSubheader>
+      )}
       <Can
         role={(user.profile === "user" && user.showDashboard === "enabled") || user.allowRealTime === "enabled" ? "admin" : user.profile}
         perform={"drawer-admin-items:view"}
         yes={() => (
-          <ListItemLink
-            to="/"
-            primary="Dashboard"
-            icon={<DashboardOutlinedIcon />}
-            iconKey="dashboard"
-            tooltip={collapsed}
-          />
+          <>
+            <ListItemLink
+              to="/"
+              primary="Dashboard"
+              icon={<DashboardOutlinedIcon />}
+              iconKey="dashboard"
+              tooltip={collapsed}
+            />
+            <ListItemLink
+              to="/reports"
+              primary={i18n.t("mainDrawer.listItems.reports")}
+              icon={<Description />}
+              iconKey="dashboard"
+              tooltip={collapsed}
+            />
+            {user.super && (
+              <ListItemLink
+                to="/server-metrics"
+                primary="Métricas do Servidor"
+                icon={<RouterIcon />}
+                iconKey="server"
+                tooltip={collapsed}
+              />
+            )}
+          </>
         )}
       />
 
-      {/* SEÃ‡ÃƒO: ATENDIMENTO */}
+      {/* SEÇÃO: ATENDIMENTO */}
       {!collapsed && (
         <ListSubheader inset className={classes.listSubheader}>
           Atendimento
@@ -584,7 +607,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
         tooltip={collapsed}
       />
 
-      {/* ADMINISTRATIVO â€” expansivo */}
+      {/* ADMINISTRATIVO — expansivo */}
       <ListItem
         button
         className={`${classes.listItem} ${collapsed ? classes.listItemIconOnly : ""}`}
@@ -607,12 +630,12 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           {showKanban && (
             <ListItemLink to="/kanban" primary="Kanban" icon={<ViewKanban />} tooltip={collapsed} className={classes.nested} />
           )}
-          <ListItemLink to="/quick-messages" primary="Respostas RÃ¡pidas" icon={<FlashOnIcon />} tooltip={collapsed} className={classes.nested} />
+          <ListItemLink to="/quick-messages" primary="Respostas Rápidas" icon={<FlashOnIcon />} tooltip={collapsed} className={classes.nested} />
           <ListItemLink to="/tags" primary="Tags" icon={<LocalOfferIcon />} tooltip={collapsed} className={classes.nested} />
         </List>
       </Collapse>
 
-      {/* FERRAMENTAS â€” expansivo (somente admin) */}
+      {/* FERRAMENTAS — expansivo (somente admin) */}
       <Can
         role={user.profile === "user" && user.allowConnections === "enabled" ? "admin" : user.profile}
         perform="dashboard:view"
@@ -636,22 +659,22 @@ const MainListItems = ({ collapsed, drawerClose }) => {
                 {showExternalApi && (
                   <ListItemLink to="/messages-api" primary="API" icon={<CodeRoundedIcon />} tooltip={collapsed} className={classes.nested} />
                 )}
-                <ListItemLink to="/connections" primary="ConexÃµes" icon={<SignalCellularConnectedNoInternet4BarIcon />} tooltip={collapsed} className={classes.nested} showBadge={connectionWarning} />
+                <ListItemLink to="/connections" primary="Conexões" icon={<SignalCellularConnectedNoInternet4BarIcon />} tooltip={collapsed} className={classes.nested} showBadge={connectionWarning} />
                 <ListItemLink to="/queues" primary="Filas & Chatbot" icon={<AccountTreeOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
                 {showIntegrations && (
-                  <ListItemLink to="/queue-integration" primary="IntegraÃ§Ãµes" icon={<DeviceHubOutlined />} tooltip={collapsed} className={classes.nested} />
+                  <ListItemLink to="/queue-integration" primary="Integrações" icon={<DeviceHubOutlined />} tooltip={collapsed} className={classes.nested} />
                 )}
                 {showOpenAi && (
                   <ListItemLink to="/prompts" primary="Talk.Ai" icon={<AllInclusive />} tooltip={collapsed} className={classes.nested} />
                 )}
-                <ListItemLink to="/users" primary="UsuÃ¡rios" icon={<PeopleAltOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
+                <ListItemLink to="/users" primary="Usuários" icon={<PeopleAltOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
               </List>
             </Collapse>
           </>
         )}
       />
 
-      {/* CAMPANHAS â€” expansivo */}
+      {/* CAMPANHAS — expansivo */}
       {showCampaigns && (
         <>
           <ListItem
@@ -669,7 +692,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           </ListItem>
           <Collapse in={!collapsed && openCampaignSubmenu} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemLink to="/campaigns-config" primary="ConfiguraÃ§Ãµes" icon={<SettingsOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
+              <ListItemLink to="/campaigns-config" primary="Configurações" icon={<SettingsOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
               <ListItemLink to="/campaigns" primary="Listagem" icon={<EventAvailableIcon />} tooltip={collapsed} className={classes.nested} />
               <ListItemLink to="/contact-lists" primary="Listas de Contatos" icon={<ContactPhoneOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
             </List>
@@ -677,7 +700,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
         </>
       )}
 
-      {/* FLOWBUILDER â€” expansivo */}
+      {/* FLOWBUILDER — expansivo */}
       <ListItem
         button
         className={`${classes.listItem} ${collapsed ? classes.listItemIconOnly : ""}`}
@@ -698,7 +721,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
         </List>
       </Collapse>
 
-      {/* CONFIGURAÃ‡Ã•ES */}
+      {/* CONFIGURAÇÕES */}
       <Can
         role={user.profile === "user" && user.allowConnections === "enabled" ? "admin" : user.profile}
         perform="dashboard:view"
