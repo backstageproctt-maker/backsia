@@ -673,6 +673,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           <Collapse in={!collapsed && openCampaignSubmenu} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemLink to="/campaigns" primary="Listagem" icon={<EventAvailableIcon />} tooltip={collapsed} className={classes.nested} />
+              <ListItemLink to="/contact-lists" primary="Listas de Contatos" icon={<ContactPhoneOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
               <ListItemLink to="/campaigns-config" primary="Configurações" icon={<SettingsOutlinedIcon />} tooltip={collapsed} className={classes.nested} />
             </List>
           </Collapse>
@@ -726,7 +727,7 @@ const MainListItems = ({ collapsed, drawerClose }) => {
           <Collapse in={!collapsed && openFlowSubmenu} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemLink to="/flowbuilders" primary="Criar Fluxos" icon={<Webhook />} tooltip={collapsed} className={classes.nested} />
-              <ListItemLink to="/phrases" primary="Lista de Frases" icon={<ListIcon />} tooltip={collapsed} className={classes.nested} />
+              <ListItemLink to="/phrase-lists" primary="Lista de Frases" icon={<ListIcon />} tooltip={collapsed} className={classes.nested} />
             </List>
           </Collapse>
           {showOpenAi && (
