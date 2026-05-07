@@ -379,8 +379,6 @@ const MainListItems = ({ collapsed, drawerClose }) => {
   const [searchParam] = useState("");
   const [chats, dispatch] = useReducer(reducer, []);
   const [, setVersion] = useState(false);
-  const [openCampaignSubmenu, setOpenCampaignSubmenu] = useState(false);
-  const [openFlowSubmenu, setOpenFlowSubmenu] = useState(false);
   const [managementHover, setManagementHover] = useState(false);
   const [campaignHover, setCampaignHover] = useState(false);
   const [flowHover, setFlowHover] = useState(false);
